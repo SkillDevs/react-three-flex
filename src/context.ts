@@ -1,12 +1,12 @@
 import { createContext } from 'react'
 import { YogaNode } from 'yoga-layout-prebuilt'
-import { Group } from 'three'
 import { R3FlexProps } from './props'
+import Konva from 'konva'
 
 export interface SharedFlexContext {
   scaleFactor: number
   requestReflow(): void
-  registerBox(node: YogaNode, group: Group, flexProps: R3FlexProps, centerAnchor?: boolean): void
+  registerBox(node: YogaNode, group: Konva.Group, flexProps: R3FlexProps, centerAnchor?: boolean): void
   unregisterBox(node: YogaNode): void
 }
 

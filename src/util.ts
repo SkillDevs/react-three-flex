@@ -1,4 +1,3 @@
-import { Vector3 } from 'three'
 import Yoga, { YogaNode } from 'yoga-layout-prebuilt'
 import { R3FlexProps, FlexPlane } from './props'
 
@@ -91,8 +90,6 @@ export const setYogaProperties = (node: YogaNode, props: R3FlexProps, scaleFacto
     }
   })
 }
-
-export const vectorFromObject = ({ x, y, z }: { x: number; y: number; z: number }) => new Vector3(x, y, z)
 
 export type Axis = 'x' | 'y' | 'z'
 export const axes: Axis[] = ['x', 'y', 'z']

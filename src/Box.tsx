@@ -1,12 +1,12 @@
 import React, { useLayoutEffect, useRef, useMemo, useState } from 'react'
-import * as THREE from 'three'
 import Yoga from 'yoga-layout-prebuilt'
-import { ReactThreeFiber, useFrame } from '@react-three/fiber'
 
 import { setYogaProperties, rmUndefFromObj } from './util'
 import { boxContext, flexContext } from './context'
 import { R3FlexProps } from './props'
 import { useReflow, useContext } from './hooks'
+import Konva from 'konva'
+import { Group } from 'react-konva'
 
 /**
  * Box container for 3D Objects.
@@ -76,8 +76,7 @@ export function Box({
 }: {
   centerAnchor?: boolean
   children: React.ReactNode | ((width: number, height: number) => React.ReactNode)
-} & R3FlexProps &
-  Omit<ReactThreeFiber.Object3DNode<THREE.Group, typeof THREE.Group>, 'children'>) {
+} & R3FlexProps) {
   // must memoize or the object literal will cause every dependent of flexProps to rerender everytime
   const flexProps: R3FlexProps = useMemo(() => {
     const _flexProps = {
@@ -184,7 +183,7 @@ export function Box({
 
   const { registerBox, unregisterBox, scaleFactor } = useContext(flexContext)
   const { node: parent } = useContext(boxContext)
-  const group = useRef<THREE.Group>()
+  const group = useRef<Konva.Group>(null)
   const node = useMemo(() => Yoga.Node.create(), [])
   const reflow = useReflow()
 
@@ -213,7 +212,7 @@ export function Box({
 
   const [size, setSize] = useState<[number, number]>([0, 0])
   const epsilon = 1 / scaleFactor
-  useFrame(() => {
+  useLayoutEffect(() => {
     const width =
       (typeof flexProps.width === 'number' ? flexProps.width : null) || node.getComputedWidth().valueOf() / scaleFactor
     const height =
@@ -223,15 +222,16 @@ export function Box({
     if (Math.abs(width - size[0]) > epsilon || Math.abs(height - size[1]) > epsilon) {
       setSize([width, height])
     }
+    console.log('Run Konva node resize', width, height)
   })
 
   const sharedBoxContext = useMemo(() => ({ node, size }), [node, size])
 
   return (
-    <group ref={group} {...props}>
+    <Group ref={group} {...props}>
       <boxContext.Provider value={sharedBoxContext}>
         {typeof children === 'function' ? children(size[0], size[1]) : children}
       </boxContext.Provider>
-    </group>
+    </Group>
   )
 }
