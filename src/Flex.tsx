@@ -234,7 +234,7 @@ export function Flex({
 
   // Mechanism for invalidating and recalculating layout
   const requestReflow = useCallback(() => {
-    setDirtyId(dirtyId + 1)
+    // setDirtyId(dirtyId + 1)
     invalidate()
   }, [invalidate, dirtyId])
 
@@ -258,6 +258,7 @@ export function Flex({
     }),
     [requestReflow, registerBox, unregisterBox, scaleFactor]
   )
+
   const sharedBoxContext = useMemo<SharedBoxContext>(
     () => ({ node, size: [flexWidth, flexHeight] }),
     [node, flexWidth, flexHeight]
@@ -314,9 +315,10 @@ export function Flex({
 
   // We check if we have to reflow every frame
   // This way we can batch the reflow if we have multiple reflow requests
-  useLayoutEffect(() => {
-    reflow()
-  }, [dirtyId])
+  //TODO: Fix
+  // useLayoutEffect(() => {
+  //   reflow()
+  // }, [dirtyId])
 
   return (
     <Group {...props}>

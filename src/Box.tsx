@@ -78,6 +78,7 @@ export function Box({
   children: React.ReactNode | ((width: number, height: number) => React.ReactNode)
 } & R3FlexProps) {
   // must memoize or the object literal will cause every dependent of flexProps to rerender everytime
+
   const flexProps: R3FlexProps = useMemo(() => {
     const _flexProps = {
       flexDirection,
@@ -223,7 +224,7 @@ export function Box({
       setSize([width, height])
     }
     console.log('Run Konva node resize', width, height)
-  })
+  }, [epsilon, flexProps.height, flexProps.width, node, scaleFactor, size])
 
   const sharedBoxContext = useMemo(() => ({ node, size }), [node, size])
 
