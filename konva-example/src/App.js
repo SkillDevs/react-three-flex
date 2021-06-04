@@ -1,25 +1,11 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
-import { Stage, Layer, Rect, Text } from 'react-konva'
+import { Stage, Layer, Circle, Text } from 'react-konva'
 import Konva from 'konva'
 
-class ColoredRect extends React.Component {
-  state = {
-    color: 'green',
-  }
-  handleClick = () => {
-    this.setState({
-      color: Konva.Util.getRandomColor(),
-    })
-  }
-  render() {
-    return (
-      <Rect x={20} y={20} width={50} height={50} fill={this.state.color} shadowBlur={5} onClick={this.handleClick} />
-    )
-  }
+function ColoredCircle() {
+  return <Circle fill="red" radius={10} x={100} y={100} />
 }
-
-class App extends Component {
+export default class App extends Component {
   render() {
     // Stage is a div container
     // Layer is actual canvas element (so you may have several canvases in the stage)
@@ -27,12 +13,9 @@ class App extends Component {
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer>
-          <Text text="Try click on rect" />
-          <ColoredRect />
+          <ColoredCircle />
         </Layer>
       </Stage>
     )
   }
 }
-
-render(<App />, document.getElementById('root'))
