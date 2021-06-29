@@ -223,7 +223,6 @@ export function Box({
     if (Math.abs(width - size[0]) > epsilon || Math.abs(height - size[1]) > epsilon) {
       setSize([width, height])
     }
-    console.log('Run Konva node resize', width, height)
   }, [epsilon, flexProps.height, flexProps.width, node, scaleFactor, size])
 
   const sharedBoxContext = useMemo(() => ({ node, size }), [node, size])

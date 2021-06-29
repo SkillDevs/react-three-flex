@@ -276,10 +276,13 @@ export function Flex({
         node.setWidth(scaledWidth)
         node.setHeight(scaledHeight)
       } else {
-        // No size specified, calculate bounding box
-        const boundingBox = group.getClientRect()
-        node.setWidth(scaledWidth || boundingBox.width * scaleFactor)
-        node.setHeight(scaledHeight || boundingBox.height * scaleFactor)
+        // We cannot calculate the size of a group/parent because the children haven't been positioned
+        // The children are all in the origin before using Yoga
+        if (node.getChildCount() === 0) {
+          const boundingBox = group.getClientRect()
+          node.setWidth(scaledWidth || boundingBox.width * scaleFactor)
+          node.setHeight(scaledHeight || boundingBox.height * scaleFactor)
+        }
       }
     })
 
@@ -296,7 +299,7 @@ export function Flex({
       const { left, top, width, height } = node.getComputedLayout()
       const position = {
         x: (left + (centerAnchor ? width / 2 : 0)) / scaleFactor,
-        y: -(top + (centerAnchor ? height / 2 : 0)) / scaleFactor,
+        y: (top + (centerAnchor ? height / 2 : 0)) / scaleFactor,
       }
 
       minX = Math.min(minX, left)
@@ -315,10 +318,9 @@ export function Flex({
 
   // We check if we have to reflow every frame
   // This way we can batch the reflow if we have multiple reflow requests
-  //TODO: Fix
-  // useLayoutEffect(() => {
-  //   reflow()
-  // }, [dirtyId])
+  useLayoutEffect(() => {
+    reflow()
+  }, [])
 
   return (
     <Group {...props}>
