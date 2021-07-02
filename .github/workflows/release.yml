@@ -21,17 +21,17 @@ jobs:
       - name: Publish to NPM
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Create a new release
-        id: create_release
-        uses: actions/create-release@v1.1.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: |
-            # Changes
-            - TODO
-          draft: true
-          prerelease: false
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create a new release
+      #   id: create_release
+      #   uses: actions/create-release@v1.1.1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: ${{ github.ref }}
+      #     body: |
+      #       # Changes
+      #       - TODO
+      #     draft: true
+      #     prerelease: false

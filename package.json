@@ -1,26 +1,20 @@
 {
-  "name": "react-konva-flex",
+  "name": "@skilldevs/react-konva-flex",
   "version": "0.6.0",
-  "description": "`<Flex />` component for the 3D World.",
+  "description": "`<Flex />` component for the 2D World.",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "keywords": [
     "react",
-    "three",
-    "r3f",
-    "react-three-fiber",
-    "3d",
+    "konva",
     "flex",
     "flexbox",
     "yoga",
     "yoga-layout"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pmndrs/react-three-flex.git"
-  },
-  "bugs": {
-    "url": "https://github.com/pmndrs/react-three-flex/issues"
-  },
-  "homepage": "https://github.com/pmndrs/react-three-flex#readme",
+  "repository": "git://github.com/SkillDevs/react-three-flex.git",
+  "homepage": "https://github.com/SkillDevs/react-three-flex#readme",
   "license": "MIT",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
