@@ -21,7 +21,7 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           registry: https://npm.pkg.github.com
-          token: ${{ secrets.PACKAGES_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       # - name: Create a new release
       #   id: create_release
       #   uses: actions/create-release@v1.1.1
