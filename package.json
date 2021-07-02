@@ -2,9 +2,6 @@
   "name": "@skilldevs/react-konva-flex",
   "version": "0.8.0",
   "description": "`<Flex />` component for the 2D World.",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "keywords": [
     "react",
     "konva",
