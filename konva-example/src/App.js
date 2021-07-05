@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useLayoutEffect } from 'react'
 import { Stage, Layer, Circle, Text, Group, Rect } from 'react-konva'
 import Konva from 'konva'
-import { Flex, Box } from 'react-konva-flex'
+import { Flex, Box } from '@skilldevs/react-konva-flex'
 
 export default function App() {
   // Stage is a div container

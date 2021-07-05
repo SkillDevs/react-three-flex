@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
-    "@skilldevs/react-konva-flex": "0.8.0",
+    "@skilldevs/react-konva-flex": "git://github.com/SkillDevs/react-three-flex.git#konva",
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -72,7 +72,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
-    "start": "cd .. && pnpm build && cd konva-example && node scripts/start.js",
+    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
