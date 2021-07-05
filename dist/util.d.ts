@@ -1,0 +1,10 @@
+import { YogaNode } from 'yoga-layout-prebuilt';
+import { R3FlexProps, FlexPlane } from './props';
+export declare const capitalize: (s: string) => string;
+export declare const jsxPropToYogaProp: (s: string) => string;
+export declare const setYogaProperties: (node: YogaNode, props: R3FlexProps, scaleFactor: number) => void;
+export declare type Axis = 'x' | 'y' | 'z';
+export declare const axes: Axis[];
+export declare function getDepthAxis(plane: FlexPlane): "x" | "y" | "z";
+export declare function getFlex2DSize(sizes: [number, number, number], plane: FlexPlane): number[];
+export declare const rmUndefFromObj: (obj: Record<string, any>) => void;
