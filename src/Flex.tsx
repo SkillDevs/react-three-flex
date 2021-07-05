@@ -279,7 +279,9 @@ export function Flex({
         // We cannot calculate the size of a group/parent because the children haven't been positioned
         // The children are all in the origin before using Yoga
         if (node.getChildCount() === 0) {
-          const boundingBox = group.getClientRect()
+          const boundingBox = group.getClientRect({
+            skipTransform: true,
+          })
           node.setWidth(scaledWidth || boundingBox.width * scaleFactor)
           node.setHeight(scaledHeight || boundingBox.height * scaleFactor)
         }
