@@ -260,8 +260,8 @@ export function Flex({
   )
 
   const sharedBoxContext = useMemo<SharedBoxContext>(
-    () => ({ node, size: [flexWidth, flexHeight] }),
-    [node, flexWidth, flexHeight]
+    () => ({ node, size: [flexWidth, flexHeight], rebuildFlag: Date.now() }),
+    [node, flexWidth, flexHeight, children]
   )
 
   // Handles the reflow procedure

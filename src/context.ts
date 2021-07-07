@@ -28,11 +28,13 @@ export const flexContext = createContext<SharedFlexContext>(initialSharedFlexCon
 export interface SharedBoxContext {
   node: YogaNode | null
   size: [number, number]
+  rebuildFlag: number
 }
 
 const initialSharedBoxContext: SharedBoxContext = {
   node: null,
   size: [0, 0],
+  rebuildFlag: 0,
 }
 
 export const boxContext = createContext<SharedBoxContext>(initialSharedBoxContext)
