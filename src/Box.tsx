@@ -204,7 +204,7 @@ export function Box({
       parent.removeChild(node)
       unregisterBox(node)
     }
-  }, [node, parent, flexProps, centerAnchor, registerBox, unregisterBox])
+  }, [node, parent, flexProps, centerAnchor, registerBox, unregisterBox, children])
 
   // We need to reflow if props change
   useLayoutEffect(() => {

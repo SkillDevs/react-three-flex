@@ -1,7 +1,8 @@
-import React, { useMemo, useRef, useLayoutEffect } from 'react'
-import { Stage, Layer, Circle, Text, Group, Rect } from 'react-konva'
-import Konva from 'konva'
-import { Flex, Box } from '@skilldevs/react-konva-flex'
+import React, { useMemo, useRef, useLayoutEffect } from "react";
+import { Stage, Layer, Circle, Text, Group, Rect } from "react-konva";
+import Konva from "konva";
+import { Flex, Box } from "@skilldevs/react-konva-flex";
+import ReflowLayout from "./Reflow";
 
 export default function App() {
   // Stage is a div container
@@ -11,32 +12,31 @@ export default function App() {
   return (
     <Stage width={window.innerWidth} height={window.innerHeight}>
       <Layer>
-        <Group x={400} y={200}>
-          <Layout />
-          {/* <Circle fill="blue" radius={5} /> */}
-          {/* <Rect fill="purple" width={5} height={5} /> */}
-        </Group>
+        <ReflowLayout />
+        {/* <Layout /> */}
+        {/* <Circle fill="blue" radius={5} /> */}
+        {/* <Rect fill="purple" width={5} height={5} /> */}
       </Layer>
     </Stage>
-  )
+  );
 }
 
 function Layout() {
   // size={[300, 200, 0]}
-  const konvaRef = useRef()
-  const rectRef = useRef()
+  const konvaRef = useRef();
+  const rectRef = useRef();
   const reflow = () => {
-    if (!konvaRef.current) return
-    const rect = konvaRef.current.getClientRect()
-    console.log(rect)
+    if (!konvaRef.current) return;
+    const rect = konvaRef.current.getClientRect();
+    console.log(rect);
 
-    rectRef.current.width(rect.width)
-    rectRef.current.height(rect.height)
-    rectRef.current.y(rect.y - 200)
-    rectRef.current.x(rect.x - 200)
+    rectRef.current.width(rect.width);
+    rectRef.current.height(rect.height);
+    rectRef.current.y(rect.y - 200);
+    rectRef.current.x(rect.x - 200);
     // console.log('Reflowing')
-    rectRef.current.getLayer().batchDraw()
-  }
+    rectRef.current.getLayer().batchDraw();
+  };
 
   useLayoutEffect(() => {
     // setInterval(() => {
@@ -45,8 +45,8 @@ function Layout() {
     // reflow()
     // rectRef.current.x(rect.x)
     // rectRef.current.y(rect.y)
-  }, [])
-  const size = [600, 800, 0]
+  }, []);
+  const size = [600, 800, 0];
   return (
     <Group>
       {/* <Rect ref={rectRef} stroke="black" /> */}
@@ -59,7 +59,7 @@ function Layout() {
         </Flex>
       </Group>
     </Group>
-  )
+  );
 }
 function Block({ size, color1, color2 }) {
   return (
@@ -81,7 +81,7 @@ function Block({ size, color1, color2 }) {
         </Box>
         <Box flexDirection="row">
           <Box>
-            <Rect fill={'pink'} height={50} width={70} />
+            <Rect fill={"pink"} height={50} width={70} />
           </Box>
           <Box>
             <Rect fill={color1} height={50} width={70} />
@@ -92,5 +92,5 @@ function Block({ size, color1, color2 }) {
         <Rect fill={color2} height={100} width={60} />
       </Box>
     </Box>
-  )
+  );
 }
