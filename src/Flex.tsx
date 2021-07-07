@@ -284,6 +284,9 @@ export function Flex({
           })
           node.setWidth(scaledWidth || boundingBox.width * scaleFactor)
           node.setHeight(scaledHeight || boundingBox.height * scaleFactor)
+        } else {
+          node.setWidth(NaN) // Reset yoga node size for parents
+          node.setHeight(NaN)
         }
       }
     })
@@ -321,7 +324,6 @@ export function Flex({
   // We check if we have to reflow every frame
   // This way we can batch the reflow if we have multiple reflow requests
   useLayoutEffect(() => {
-    console.log('Running reflow callback')
     reflow()
   }, [children, flexProps])
 

@@ -8,7 +8,7 @@ export default function ReflowLayout() {
   // Layer is actual canvas element (so you may have several canvases in the stage)
   // And then we have canvas shapes inside the Layer
   // const dos = useMemo(() => 2, [])
-  const [num, setNum] = useState(2)
+  const [num, setNum] = useState(0)
 
   const boxes = Array(num)
     .fill(undefined)
@@ -20,7 +20,6 @@ export default function ReflowLayout() {
         </Box>
       )
     })
-    .reverse()
 
   const arrow = useMemo(() => {
     return (
@@ -35,7 +34,13 @@ export default function ReflowLayout() {
     <Group x={400} y={200}>
       {/* <Circle fill="blue" radius={5} /> */}
       <Flex flexDirection="row" alignItems="center">
-        {boxes}
+        <Box key="???????????">
+          {/* <Circle fill="red" radius={50} /> */}
+          <Rect fill="yellow" width={100} height={20} />
+        </Box>
+        {/* {boxes} */}
+        {/* {boxes.length > 0 ? <Box flexDirection="row">{boxes}</Box> : undefined} */}
+        <Box flexDirection="row">{boxes}</Box>
         {arrow}
         <Box centerAnchor key="button">
           <Circle
