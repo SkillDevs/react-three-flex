@@ -42,7 +42,7 @@ export default function ReflowLayout() {
         {/* {boxes.length > 0 ? <Box flexDirection="row">{boxes}</Box> : undefined} */}
         <Box flexDirection="row">{boxes}</Box>
         {arrow}
-        <Box centerAnchor key="button">
+        <Box key="button">
           <Circle
             fill="purple"
             radius={50}

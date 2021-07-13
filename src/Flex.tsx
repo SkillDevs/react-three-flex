@@ -267,7 +267,8 @@ export function Flex({
   // Handles the reflow procedure
   function reflow() {
     // Recalc all the sizes
-    boxesRef.current.forEach(({ group, node, flexProps }) => {
+    const nodeToBB: (IRect | undefined)[] = Array(boxesRef.current.length)
+    boxesRef.current.forEach(({ group, node, flexProps }, index) => {
       const scaledWidth = typeof flexProps.width === 'number' ? flexProps.width * scaleFactor : flexProps.width
       const scaledHeight = typeof flexProps.height === 'number' ? flexProps.height * scaleFactor : flexProps.height
 
@@ -282,6 +283,8 @@ export function Flex({
           const boundingBox = group.getClientRect({
             skipTransform: true,
           })
+
+          nodeToBB[index] = boundingBox
           node.setWidth(scaledWidth || boundingBox.width * scaleFactor)
           node.setHeight(scaledHeight || boundingBox.height * scaleFactor)
         } else {
@@ -300,12 +303,24 @@ export function Flex({
     let maxY = 0
 
     // Reposition after recalculation
-    boxesRef.current.forEach(({ group, node, centerAnchor }) => {
+    boxesRef.current.forEach(({ group, node, centerAnchor }, index) => {
       const { left, top, width, height } = node.getComputedLayout()
+      let rectOffsetX = 0
+      let rectOffsetY = 0
+      const bb = nodeToBB[index]
+      if (bb) {
+        rectOffsetX = bb.x
+        rectOffsetY = bb.y
+      }
+
       const position = {
         x: (left + (centerAnchor ? width / 2 : 0)) / scaleFactor,
         y: (top + (centerAnchor ? height / 2 : 0)) / scaleFactor,
       }
+
+      // Offset with the bounding box x,y when the origin is not the top left
+      position.x -= rectOffsetX
+      position.y -= rectOffsetY
 
       minX = Math.min(minX, left)
       minY = Math.min(minY, top)
