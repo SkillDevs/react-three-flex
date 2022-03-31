@@ -73,7 +73,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
-    "start": "cd .. && pnpm build && cd konva-example && node scripts/start.js",
+    "start": "cd .. && yarn build && cd konva-example && node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },

@@ -47,7 +47,7 @@
   "dependencies": {
     "konva": "^7.2.5",
     "react-konva": "^17.0.2-4",
-    "yoga-layout-prebuilt": "^1.9.6"
+    "yoga-layout-prebuilt": "https://github.com/saitonakamura/yoga-layout-prebuilt#4edfdb827b6ad1f5884af46e70064ee81e68a222"
   },
   "devDependencies": {
     "@babel/core": "7.11.0",
