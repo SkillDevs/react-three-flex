@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useRef, useLayoutEffect } from 'react'
-import { Stage, Layer, Circle, Text, Group, Rect } from 'react-konva'
-import Konva from 'konva'
+import { useState, useMemo } from 'react'
+import { Circle, Group, Rect } from 'react-konva'
 import { Flex, Box } from '@skilldevs/react-konva-flex'
 
 export default function ReflowLayout() {

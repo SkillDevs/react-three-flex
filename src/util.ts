@@ -1,4 +1,5 @@
-import Yoga, { YogaNode } from 'yoga-layout-prebuilt'
+import { yogaGlobal } from './yoga'
+import { YogaNode } from 'yoga-layout-wasm'
 import { R3FlexProps, FlexPlane } from './props'
 
 export const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1)
@@ -14,16 +15,16 @@ export const setYogaProperties = (node: YogaNode, props: R3FlexProps, scaleFacto
         case 'flexDir':
         case 'dir':
         case 'flexDirection':
-          return node.setFlexDirection((Yoga as any)[`FLEX_DIRECTION_${jsxPropToYogaProp(value)}`])
+          return node.setFlexDirection((yogaGlobal as any)[`FLEX_DIRECTION_${jsxPropToYogaProp(value)}`])
         case 'align':
         case 'alignItems':
-          return node.setAlignItems((Yoga as any)[`ALIGN_${jsxPropToYogaProp(value)}`])
+          return node.setAlignItems((yogaGlobal as any)[`ALIGN_${jsxPropToYogaProp(value)}`])
         case 'justify':
         case 'justifyContent':
-          return node.setJustifyContent((Yoga as any)[`JUSTIFY_${jsxPropToYogaProp(value)}`])
+          return node.setJustifyContent((yogaGlobal as any)[`JUSTIFY_${jsxPropToYogaProp(value)}`])
         case 'wrap':
         case 'flexWrap':
-          return node.setFlexWrap((Yoga as any)[`WRAP_${jsxPropToYogaProp(value)}`])
+          return node.setFlexWrap((yogaGlobal as any)[`WRAP_${jsxPropToYogaProp(value)}`])
         case 'basis':
         case 'flexBasis':
           return node.setFlexBasis(value)
@@ -54,35 +55,35 @@ export const setYogaProperties = (node: YogaNode, props: R3FlexProps, scaleFacto
           return node.setFlexWrap(value as any)
         case 'padding':
         case 'p':
-          return node.setPadding(Yoga.EDGE_ALL, scaledValue)
+          return node.setPadding(yogaGlobal.EDGE_ALL, scaledValue)
         case 'paddingLeft':
         case 'pl':
-          return node.setPadding(Yoga.EDGE_LEFT, scaledValue)
+          return node.setPadding(yogaGlobal.EDGE_LEFT, scaledValue)
         case 'paddingRight':
         case 'pr':
-          return node.setPadding(Yoga.EDGE_RIGHT, scaledValue)
+          return node.setPadding(yogaGlobal.EDGE_RIGHT, scaledValue)
         case 'paddingTop':
         case 'pt':
-          return node.setPadding(Yoga.EDGE_TOP, scaledValue)
+          return node.setPadding(yogaGlobal.EDGE_TOP, scaledValue)
         case 'paddingBottom':
         case 'pb':
-          return node.setPadding(Yoga.EDGE_BOTTOM, scaledValue)
+          return node.setPadding(yogaGlobal.EDGE_BOTTOM, scaledValue)
 
         case 'margin':
         case 'm':
-          return node.setMargin(Yoga.EDGE_ALL, scaledValue)
+          return node.setMargin(yogaGlobal.EDGE_ALL, scaledValue)
         case 'marginLeft':
         case 'ml':
-          return node.setMargin(Yoga.EDGE_LEFT, scaledValue)
+          return node.setMargin(yogaGlobal.EDGE_LEFT, scaledValue)
         case 'marginRight':
         case 'mr':
-          return node.setMargin(Yoga.EDGE_RIGHT, scaledValue)
+          return node.setMargin(yogaGlobal.EDGE_RIGHT, scaledValue)
         case 'marginTop':
         case 'mt':
-          return node.setMargin(Yoga.EDGE_TOP, scaledValue)
+          return node.setMargin(yogaGlobal.EDGE_TOP, scaledValue)
         case 'marginBottom':
         case 'mb':
-          return node.setMargin(Yoga.EDGE_BOTTOM, scaledValue)
+          return node.setMargin(yogaGlobal.EDGE_BOTTOM, scaledValue)
 
         default:
           return (node[`set${capitalize(name)}` as keyof YogaNode] as any)(scaledValue)

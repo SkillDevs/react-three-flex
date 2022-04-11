@@ -1,6 +1,6 @@
 /// <reference types="yoga-layout" />
 /// <reference types="react" />
-import { YogaNode } from 'yoga-layout-prebuilt';
+import { YogaNode } from 'yoga-layout-wasm';
 import { R3FlexProps } from './props';
 import Konva from 'konva';
 export interface SharedFlexContext {

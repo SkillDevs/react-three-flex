@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useRef, useMemo, useState } from 'react'
-import Yoga from 'yoga-layout-prebuilt'
 
 import { setYogaProperties, rmUndefFromObj } from './util'
 import { boxContext, flexContext } from './context'
@@ -7,6 +6,7 @@ import { R3FlexProps } from './props'
 import { useReflow, useContext } from './hooks'
 import Konva from 'konva'
 import { Group } from 'react-konva'
+import { yogaGlobal } from './yoga'
 
 /**
  * Box container for 3D Objects.
@@ -185,7 +185,7 @@ export function Box({
   const { registerBox, unregisterBox, scaleFactor } = useContext(flexContext)
   const { node: parent, rebuildFlag } = useContext(boxContext)
   const group = useRef<Konva.Group>(null)
-  const node = useMemo(() => Yoga.Node.create(), [])
+  const node = useMemo(() => yogaGlobal.Node.create(), [])
   const reflow = useReflow()
 
   useLayoutEffect(() => {

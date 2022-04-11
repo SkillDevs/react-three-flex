@@ -1,4 +1,4 @@
-import { YogaNode } from 'yoga-layout-prebuilt';
+import { YogaNode } from 'yoga-layout-wasm';
 import { R3FlexProps, FlexPlane } from './props';
 export declare const capitalize: (s: string) => string;
 export declare const jsxPropToYogaProp: (s: string) => string;

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useMemo, useCallback, PropsWithChildren, useRef, useState } from 'react'
-import Yoga, { YogaNode } from 'yoga-layout-prebuilt'
+import { YogaNode } from 'yoga-layout-wasm'
 
 import { setYogaProperties, rmUndefFromObj, Axis, getDepthAxis, getFlex2DSize } from './util'
 import { boxContext, flexContext, SharedFlexContext, SharedBoxContext } from './context'
@@ -7,6 +7,7 @@ import type { R3FlexProps, FlexYogaDirection, FlexPlane } from './props'
 import { Group } from 'react-konva'
 
 import Konva from 'konva'
+import { yogaGlobal } from './yoga'
 
 type FlexProps = PropsWithChildren<
   Partial<{
@@ -222,7 +223,7 @@ export function Flex({
   }, [])
 
   // Reference to the yoga native node
-  const node = useMemo(() => Yoga.Node.create(), [])
+  const node = useMemo(() => yogaGlobal.Node.create(), [])
   useLayoutEffect(() => {
     setYogaProperties(node, flexProps, scaleFactor)
   }, [node, flexProps, scaleFactor])
@@ -246,7 +247,11 @@ export function Flex({
   // Common variables for reflow
   const [flexWidth, flexHeight] = getFlex2DSize(size, plane)
   const yogaDirection_ =
-    yogaDirection === 'ltr' ? Yoga.DIRECTION_LTR : yogaDirection === 'rtl' ? Yoga.DIRECTION_RTL : yogaDirection
+    yogaDirection === 'ltr'
+      ? yogaGlobal.DIRECTION_LTR
+      : yogaDirection === 'rtl'
+      ? yogaGlobal.DIRECTION_RTL
+      : yogaDirection
 
   // Shared context for flex and box
   const sharedFlexContext = useMemo<SharedFlexContext>(

@@ -1,5 +1,5 @@
 /// <reference types="yoga-layout" />
-import { YogaFlexDirection, YogaAlign, YogaJustifyContent, YogaFlexWrap, YogaDirection } from 'yoga-layout-prebuilt';
+import { YogaFlexDirection, YogaAlign, YogaJustifyContent, YogaFlexWrap, YogaDirection } from 'yoga-layout-wasm';
 export declare type FlexYogaDirection = YogaDirection | 'ltr' | 'rtl';
 export declare type FlexPlane = 'xy' | 'yz' | 'xz';
 export declare type Value = string | number;
