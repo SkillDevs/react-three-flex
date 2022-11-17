@@ -209,7 +209,7 @@ export function Box({
   // We need to reflow if props change
   useLayoutEffect(() => {
     reflow()
-  }, [flexProps, reflow])
+  }, [children, flexProps, reflow])
 
   const [size, setSize] = useState<[number, number]>([0, 0])
   const epsilon = 1 / scaleFactor
