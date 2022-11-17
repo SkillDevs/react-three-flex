@@ -230,17 +230,37 @@ export function Flex({
 
   const [dirtyId, setDirtyId] = useState<number>(0)
   const invalidate = useCallback(() => {
-    console.log('Invalidate')
+    //console.log('Invalidate')
+    //setDirtyId((id) => id + 1)
   }, [])
+
+  const frameIdRef = useRef(0)
+  const hasRequestedReflowRef = useRef(false)
+  useLayoutEffect(() => {
+    hasRequestedReflowRef.current = false
+    //console.log('frame', frameIdRef.current)
+    frameIdRef.current += 1
+  })
 
   // Mechanism for invalidating and recalculating layout
   const requestReflow = useCallback(() => {
-    // setDirtyId(dirtyId + 1)
+    if (hasRequestedReflowRef.current) return
+    hasRequestedReflowRef.current = true
+
+    // console.log('REFLOWING')
+    // reflow()
+
+    setDirtyId((dirtyId) => {
+      //console.log(`${dirtyId + 1} new dirty`)
+      return dirtyId + 1
+    })
     invalidate()
-  }, [invalidate, dirtyId])
+  }, [invalidate])
 
   // We need to reflow everything if flex props changes
   useLayoutEffect(() => {
+    //console.log('SOMETHING CHANGED', children, flexProps)
+
     requestReflow()
   }, [children, flexProps, requestReflow])
 
@@ -265,8 +285,8 @@ export function Flex({
   )
 
   const sharedBoxContext = useMemo<SharedBoxContext>(
-    () => ({ node, size: [flexWidth, flexHeight], rebuildFlag: Date.now() }),
-    [node, flexWidth, flexHeight, children]
+    () => ({ node, size: [flexWidth, flexHeight] }),
+    [node, flexWidth, flexHeight]
   )
 
   // Handles the reflow procedure
@@ -338,14 +358,14 @@ export function Flex({
     onReflow && onReflow((maxX - minX) / scaleFactor, (maxY - minY) / scaleFactor)
 
     // Ask react-three-fiber to perform a render (invalidateFrameLoop)
-    invalidate()
+    //invalidate()
   }
 
   // We check if we have to reflow every frame
   // This way we can batch the reflow if we have multiple reflow requests
   useLayoutEffect(() => {
     reflow()
-  }, [children, flexProps])
+  }, [dirtyId])
 
   return (
     <Group {...props}>

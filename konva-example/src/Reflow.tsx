@@ -13,8 +13,8 @@ export default function ReflowLayout() {
     .fill(undefined)
     .map((i, index) => {
       return (
-        <Box key={'box' + index + Date.now()} marginLeft={10}>
-          <Rect fill="black" width={50} height={50} />
+        <Box key={'box' + index} marginLeft={10}>
+          <Rect fill="red" width={50} height={50} />
           {/* <Text text={index} /> */}
         </Box>
       )
@@ -22,7 +22,7 @@ export default function ReflowLayout() {
 
   const arrow = useMemo(() => {
     return (
-      <Box key="button">
+      <Box key="arrow-black">
         {/* <Circle fill="red" radius={50} /> */}
         <Rect fill="black" width={100} height={20} />
       </Box>
@@ -32,14 +32,21 @@ export default function ReflowLayout() {
   return (
     <Group x={400} y={200}>
       {/* <Circle fill="blue" radius={5} /> */}
-      <Flex flexDirection="row" alignItems="center">
-        <Box key="???????????">
-          {/* <Circle fill="red" radius={50} /> */}
+      <Flex
+        flexDirection="row"
+        alignItems="center"
+        onReflow={(w, h) => {
+          console.log('ON REFLOW', w, h)
+        }}
+      >
+        <Box key="yellow">
           <Rect fill="yellow" width={100} height={20} />
         </Box>
         {/* {boxes} */}
         {/* {boxes.length > 0 ? <Box flexDirection="row">{boxes}</Box> : undefined} */}
-        <Box flexDirection="row">{boxes}</Box>
+        <Box key="boxesrow" flexDirection="row">
+          {boxes}
+        </Box>
         {arrow}
         <Box key="button">
           <Circle

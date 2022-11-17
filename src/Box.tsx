@@ -183,7 +183,7 @@ export function Box({
   ])
 
   const { registerBox, unregisterBox, scaleFactor } = useContext(flexContext)
-  const { node: parent, rebuildFlag } = useContext(boxContext)
+  const { node: parent } = useContext(boxContext)
   const group = useRef<Konva.Group>(null)
   const node = useMemo(() => yogaGlobal.Node.create(), [])
   const reflow = useReflow()
@@ -204,12 +204,12 @@ export function Box({
       parent.removeChild(node)
       unregisterBox(node)
     }
-  }, [node, parent, flexProps, centerAnchor, registerBox, unregisterBox, rebuildFlag])
+  }, [node, parent, flexProps, centerAnchor, registerBox, unregisterBox])
 
   // We need to reflow if props change
   useLayoutEffect(() => {
     reflow()
-  }, [flexProps, reflow, rebuildFlag])
+  }, [flexProps, reflow])
 
   const [size, setSize] = useState<[number, number]>([0, 0])
   const epsilon = 1 / scaleFactor
@@ -225,7 +225,7 @@ export function Box({
     }
   }, [epsilon, flexProps.height, flexProps.width, node, scaleFactor, size])
 
-  const sharedBoxContext = useMemo(() => ({ node, size, rebuildFlag: Date.now() }), [node, size, children])
+  const sharedBoxContext = useMemo(() => ({ node, size }), [node, size])
 
   return (
     <Group ref={group} {...props}>

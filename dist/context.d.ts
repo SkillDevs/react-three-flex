@@ -13,6 +13,5 @@ export declare const flexContext: import("react").Context<SharedFlexContext>;
 export interface SharedBoxContext {
     node: YogaNode | null;
     size: [number, number];
-    rebuildFlag: number;
 }
 export declare const boxContext: import("react").Context<SharedBoxContext>;
