@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Circle, Group, Rect } from 'react-konva'
-import { Flex, Box } from '@skilldevs/react-konva-flex'
+import { Flex, Box, useReflow } from '@skilldevs/react-konva-flex'
 
 export default function ReflowLayout() {
   // Stage is a div container
@@ -8,17 +8,6 @@ export default function ReflowLayout() {
   // And then we have canvas shapes inside the Layer
   // const dos = useMemo(() => 2, [])
   const [num, setNum] = useState(0)
-
-  const boxes = Array(num)
-    .fill(undefined)
-    .map((i, index) => {
-      return (
-        <Box key={'box' + index} marginLeft={10}>
-          <Rect fill="red" width={50} height={50} />
-          {/* <Text text={index} /> */}
-        </Box>
-      )
-    })
 
   const arrow = useMemo(() => {
     return (
@@ -44,8 +33,8 @@ export default function ReflowLayout() {
         </Box>
         {/* {boxes} */}
         {/* {boxes.length > 0 ? <Box flexDirection="row">{boxes}</Box> : undefined} */}
-        <Box key="boxesrow" flexDirection="row">
-          {boxes}
+        <Box>
+          <MyBoxesRow key="boxesrow" count={num} />
         </Box>
         {arrow}
         <Box key="button">
@@ -63,3 +52,55 @@ export default function ReflowLayout() {
     </Group>
   )
 }
+
+function MyBoxesRow({ count }: { count: number }) {
+  const [innerCount, setInnerCount] = useState(0)
+
+  const [shouldRender, setShouldRender] = useState(false)
+  const reflow = useReflow()
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShouldRender(true)
+      reflow()
+    }, 500)
+  }, [])
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setInnerCount((c) => c + 1)
+  //   }, 2000)
+  // }, [])
+
+  if (!shouldRender) return <></>
+
+  const boxes = Array(count)
+    .fill(undefined)
+    .map((i, index) => {
+      return (
+        <Box key={'box' + index} marginLeft={10}>
+          <Rect fill="red" width={50} height={50} />
+          {/* <DelayedRect /> */}
+          {/* <Text text={index} /> */}
+        </Box>
+      )
+    })
+
+  return <Box flexDirection="row">{boxes}</Box>
+}
+
+// function DelayedRect() {
+//   const [shouldRender, setShouldRender] = useState(false)
+
+//   const reflow = useReflow()
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setShouldRender(true)
+//       reflow()
+//     }, 500)
+//   }, [])
+
+//   if (!shouldRender) return <></>
+//   else return <Rect fill="red" width={50} height={50} />
+// }

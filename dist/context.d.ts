@@ -13,5 +13,6 @@ export declare const flexContext: import("react").Context<SharedFlexContext>;
 export interface SharedBoxContext {
     node: YogaNode | null;
     size: [number, number];
+    dirtyId: number;
 }
 export declare const boxContext: import("react").Context<SharedBoxContext>;

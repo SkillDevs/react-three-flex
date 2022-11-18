@@ -285,8 +285,8 @@ export function Flex({
   )
 
   const sharedBoxContext = useMemo<SharedBoxContext>(
-    () => ({ node, size: [flexWidth, flexHeight] }),
-    [node, flexWidth, flexHeight]
+    () => ({ node, size: [flexWidth, flexHeight], dirtyId: dirtyId }),
+    [node, flexWidth, flexHeight, dirtyId]
   )
 
   // Handles the reflow procedure
